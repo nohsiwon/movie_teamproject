@@ -36,29 +36,29 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-US&page=1', opti
       let movieBox = document.createElement('div');
       movieBox.className = 'movie';
       movieBox.innerHTML = `
-        <div class="movieTitle">${movie.title}</div>
-        <div class="movieInner">
-          <div class="movieImg">
-            <img
-              src=https://image.tmdb.org/t/p/w500${movie.poster_path}
-              alt=""
-            />
-          </div>
-          <div class="movieContent">
-            <div class="rating">Rating : ${movie.vote_average}</div>
-            <div class="summary">
-              ${movie.overview}
-            </div>
-          </div>
-        </div>
-        `;
+<div class="movieTitle">${movie.title}</div>
+<div class="movieInner">
+<div class="movieImg">
+<img
+src=https://image.tmdb.org/t/p/w500${movie.poster_path}
+alt=""
+/>
+</div>
+<div class="movieContent">
+<div class="rating">Rating : ${movie.vote_average}</div>
+<div class="summary">
+${movie.overview}
+</div>
+</div>
+</div>
+`;
 
       // 영화 부모 박스에 카드들 하나씩 넣기
       movies.append(movieBox);
 
-      // 클릭 시 영화 ID 표시
+      // 클릭 시 상세 페이지로 이동
       movieBox.addEventListener('click', () => {
-        alert(`영화 id는 ${movie.id}입니다`);
+        window.location.href = `./movieDetail.html?id=${movie.id}`;
       });
     });
 
@@ -73,7 +73,7 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-US&page=1', opti
 
     // 입력할 때 마다 검색
     // value.addEventListener("keyup", () => {
-    //   moviesearch();
+    // moviesearch();
     // });
 
     // search 아이콘 누를 때 마다 검색
@@ -110,30 +110,27 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-US&page=1', opti
           let movieBox = document.createElement('div');
           movieBox.className = 'movie';
           movieBox.innerHTML = `
-                      <div class="movieTitle">${movie.title}</div>
-                      <div class="movieInner">
-                        <div class="movieImg">
-                          <img
-                            src=https://image.tmdb.org/t/p/w500${movie.poster_path}
-                            alt=""
-                          />
-                        </div>
-                        <div class="movieContent">
-                          <div class="rating">Rating : ${movie.vote_average}</div>
-                          <div class="summary">
-                            ${movie.overview}
-                          </div>
-                        </div>
-                      </div>
-                      `;
+<div class="movieTitle">${movie.title}</div>
+<div class="movieInner">
+<div class="movieImg">
+<img
+src=https://image.tmdb.org/t/p/w500${movie.poster_path}
+alt=""
+/>
+</div>
+<div class="movieContent">
+<div class="rating">Rating : ${movie.vote_average}</div>
+<div class="summary">
+${movie.overview}
+</div>
+</div>
+</div>
+`;
 
           // 영화 부모 박스에 카드들 하나씩 넣기
           movies.append(movieBox);
-          // 클릭 시 상세 페이지로 이동
-          movieBox.addEventListener('click', () => {
-            window.location.href = `./movieDetail.html?id=${movie.id}`;
-          });
         });
       }
     }
   });
+//asdasdaasd
