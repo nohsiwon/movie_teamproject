@@ -1,0 +1,44 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #ffffff;
+}
+
+#movieCard {
+  background-color: #36454f;
+  color: #ffffff;
+  padding: 2%;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 50%; /* 최대 너비 설정 */
+}
+
+#movieCard img {
+  max-width: 70%;
+}
+
+#movieInfo {
+  text-align: center;
+  padding: 2%;
+  font-size: 2vw; /* 상대적인 단위로 폰트 크기 설정 */
+}
+
+/* 미디어 쿼리를 사용하여 초기 창 크기에 대한 스타일 조정 */
+@media screen and (max-width: 768px) {
+  #movieCard {
+    max-width: 90%; /* 작은 화면에 대한 최대 너비 설정 */
+  }
+
+  #movieInfo {
+    font-size: 3vw; /* 작은 화면에 대한 폰트 크기 설정 */
+  }
+}
+/* // */
