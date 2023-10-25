@@ -129,10 +129,9 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-US&page=1', opti
 
           // 영화 부모 박스에 카드들 하나씩 넣기
           movies.append(movieBox);
-
-          // 클릭 시 영화 ID 표시
+          // 클릭 시 상세 페이지로 이동
           movieBox.addEventListener('click', () => {
-            alert(`영화 id는 ${movie.id}입니다`);
+            window.location.href = `./movieDetail.html?id=${movie.id}`;
           });
         });
       }
