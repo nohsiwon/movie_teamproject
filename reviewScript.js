@@ -1,5 +1,9 @@
 let cnt = 1; // 글번호로 할당
 
+// URL에서 movieId 가져오기
+
+console.log(movieId);
+
 /* 작성 ----------------------------------------------------------*/
 function a() {
   console.log(movieId);
@@ -66,6 +70,7 @@ function saveToLocalStorage(writer, pwd, content, star) {
     pwd: pwd,
     content: content,
     star: star,
+    movieId: movieId, // 영화 ID 추가
   };
   posts.push(post);
   localStorage.setItem('posts', JSON.stringify(posts));
@@ -81,8 +86,11 @@ function loadFromLocalStorage() {
   let posts = JSON.parse(localStorage.getItem('posts')) || [];
   for (let i = 0; i < posts.length; i++) {
     let post = posts[i];
-    let el = makeDiv(post.writer, post.pwd, post.content, post.star);
-    list.appendChild(el);
+    // 영화 ID에 따라 필터링
+    if (post.movieId === movieId) {
+      let el = makeDiv(post.writer, post.pwd, post.content, post.star);
+      list.appendChild(el);
+    }
   }
 }
 
