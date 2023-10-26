@@ -29,3 +29,4 @@ fetch(`https://api.themoviedb.org/3/movie/${movieId}`, options)
         movieOverview.textContent = movie.overview;
     })
     .catch((e) => console.log('오류났습니다! 아쉽네요'));
+//test
