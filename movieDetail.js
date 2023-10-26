@@ -1,7 +1,7 @@
 // URL에서 movieId 가져오기
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get('id');
-
+console.log(movieId);
 // API에서 영화 데이터 가져오기
 const options = {
   method: 'GET',
