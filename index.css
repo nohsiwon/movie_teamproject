@@ -94,6 +94,11 @@ main {
   cursor: pointer;
 }
 
+.selectSort {
+  color: black !important;
+  background-color: white !important;
+}
+
 .contentBox .movies {
   display: flex;
   gap: 28px;

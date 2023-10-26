@@ -86,12 +86,22 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=1', opti
 
     // 이름순 정렬하기
     sortByTitle.addEventListener('click', () => {
+      // 사용한 정렬 버튼 표시
+      sortByPopul.classList.remove('selectSort');
+      sortByTitle.classList.add('selectSort');
+
+      // movies 비우고 다시 map하기
       movies.innerHTML = '';
       response.results.sort(sortTitle).filter(filter).map(mapMovies);
     });
 
     // 인기순 정렬하기
     sortByPopul.addEventListener('click', () => {
+      // 사용한 정렬 버튼 표시
+      sortByTitle.classList.remove('selectSort');
+      sortByPopul.classList.add('selectSort');
+
+      // movies 비우고 다시 map하기
       movies.innerHTML = '';
       response.results.sort(sortpopularity).filter(filter).map(mapMovies);
     });
