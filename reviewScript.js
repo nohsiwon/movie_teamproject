@@ -5,7 +5,7 @@ let cnt = 1; // 글번호로 할당
 console.log(movieId);
 
 /* 작성 ----------------------------------------------------------*/
-function a() {
+function writing() {
   console.log(movieId);
 
   let writer = f.writer.value.trim();
