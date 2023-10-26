@@ -8,7 +8,7 @@ body {
   background-color: #ffffff;
 }
 
-#movieCard {
+.movieCard {
   background-color: #36454f;
   color: #ffffff;
   padding: 2%;
@@ -21,11 +21,11 @@ body {
   max-width: 50%; /* 최대 너비 설정 */
 }
 
-#movieCard img {
+.movieCard img {
   max-width: 70%;
 }
 
-#movieInfo {
+.movieInfo {
   text-align: center;
   padding: 2%;
   font-size: 2vw; /* 상대적인 단위로 폰트 크기 설정 */
@@ -33,11 +33,11 @@ body {
 
 /* 미디어 쿼리를 사용하여 초기 창 크기에 대한 스타일 조정 */
 @media screen and (max-width: 768px) {
-  #movieCard {
+  .movieCard {
     max-width: 90%; /* 작은 화면에 대한 최대 너비 설정 */
   }
 
-  #movieInfo {
+  .movieInfo {
     font-size: 3vw; /* 작은 화면에 대한 폰트 크기 설정 */
   }
 }
