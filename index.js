@@ -28,7 +28,7 @@ const options = {
   },
 };
 
-fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-US&page=1', options)
+fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=1', options)
   .then((response) => response.json())
   .then((response) => {
     // 모든 영화 표시
