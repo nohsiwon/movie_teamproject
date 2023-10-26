@@ -34,6 +34,19 @@ img {
   cursor: pointer;
 }
 
+.sortBox {
+  display: flex;
+  gap: 10px;
+}
+
+.sortBox > div {
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
 .searchBox {
   height: 40px;
   display: flex;
@@ -55,7 +68,7 @@ img {
   outline: none;
 }
 
-.searchBox .searchIcon {
+.searchBox #searchIcon {
   width: 30px;
   height: 30px;
   font-size: 20px;
@@ -75,7 +88,6 @@ main {
 
 .movies {
   width: 1280px;
-
   margin: 0 auto;
   display: flex;
   gap: 28px;
