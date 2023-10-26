@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,10 +10,6 @@
     <header class="header">
       <div class="innerHeader">
         <div class="title">노시원의 영화마을!</div>
-        <div class="sortBox">
-          <div class="sortByTitle">이름순 정렬</div>
-          <div class="sortByPopul">인기순 정렬</div>
-        </div>
 
         <div class="searchBox">
           <input type="text" id="result" placeholder="검색해주세요" />
@@ -23,13 +19,19 @@
     </header>
 
     <main>
-      <div class="movies"></div>
+      <div class="contentBox">
+        <div class="sortBox">
+          <div class="sortByTitle">이름순 정렬</div>
+          <div class="sortByPopul">인기순 정렬</div>
+        </div>
+        <div class="movies"></div>
+      </div>
     </main>
 
     <footer class="footer">
       <div class="footerInner">copyright</div>
     </footer>
-    <script src="index.js"></script>
-    <script src="search.js"></script>
   </body>
+  <script src="index.js"></script>
+  <script src="search.js"></script>
 </html>
