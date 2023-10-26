@@ -8,54 +8,44 @@ body {
   background-color: #252424;
 }
 
+/* 영화 정보 카드 스타일 */
 .movieCard {
   background-color: #36454f;
   color: #ffffff;
-  padding: 2%;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
-  align-items: center;
-  max-width: 50%; /* 최대 너비 설정 */
+  max-width: 50%;
+  position: relative;
 }
 
 .movieCard img {
-  max-width: 30%; /* 영화 포스터의 크기 조정 */
+  max-width: 50%; /* 포스터 크기를 설정합니다. */
+  max-height: 100%; /* 포스터의 최대 높이를 설정합니다. */
+  object-fit: cover;
+  border-radius: 10px 0 0 10px; /* 포스터의 좌측 상단 모서리를 둥글게 만듭니다. */
 }
 
 .movieInfo {
-  text-align: left; /* 영화 정보를 왼쪽 정렬 */
+  text-align: left;
   padding: 2%;
-  flex: 1; /* 남은 공간을 모두 사용하도록 설정 */
+  flex: 1;
   display: flex;
   flex-direction: column;
-}
-
-.movieTitle {
-  font-size: 1.5rem; /* 영화 제목 폰트 크기 조정 */
-  margin: 1rem 0; /* 위아래 여백 추가 */
-}
-
-.movieRating {
-  font-size: 1rem; /* 영화 평점 폰트 크기 조정 */
-}
-
-.movieOverview {
-  font-size: 1rem; /* 영화 설명 폰트 크기 조정 */
 }
 
 /* 미디어 쿼리를 사용하여 초기 창 크기에 대한 스타일 조정 */
 @media screen and (max-width: 768px) {
   .movieCard {
-    max-width: 90%; /* 작은 화면에 대한 최대 너비 설정 */
+    max-width: 90%;
   }
 
   .movieCard img {
-    max-width: 50%; /* 작은 화면에 대한 영화 포스터 크기 조정 */
+    max-width: 30%;
   }
 
   .movieInfo {
-    text-align: center; /* 작은 화면에서 가운데 정렬로 변경 */
-    font-size: 1.5rem; /* 작은 화면에서 폰트 크기 증가 */
+    text-align: center;
+    font-size: 1.5rem;
   }
 }
