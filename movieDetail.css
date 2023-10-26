@@ -5,40 +5,57 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-color: #ffffff;
+  background-color: #252424;
 }
 
-#movieCard {
+.movieCard {
   background-color: #36454f;
   color: #ffffff;
   padding: 2%;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  text-align: center;
   display: flex;
-  flex-direction: column;
   align-items: center;
   max-width: 50%; /* 최대 너비 설정 */
 }
 
-#movieCard img {
-  max-width: 70%;
+.movieCard img {
+  max-width: 30%; /* 영화 포스터의 크기 조정 */
 }
 
-#movieInfo {
-  text-align: center;
+.movieInfo {
+  text-align: left; /* 영화 정보를 왼쪽 정렬 */
   padding: 2%;
-  font-size: 2vw; /* 상대적인 단위로 폰트 크기 설정 */
+  flex: 1; /* 남은 공간을 모두 사용하도록 설정 */
+  display: flex;
+  flex-direction: column;
+}
+
+.movieTitle {
+  font-size: 1.5rem; /* 영화 제목 폰트 크기 조정 */
+  margin: 1rem 0; /* 위아래 여백 추가 */
+}
+
+.movieRating {
+  font-size: 1rem; /* 영화 평점 폰트 크기 조정 */
+}
+
+.movieOverview {
+  font-size: 1rem; /* 영화 설명 폰트 크기 조정 */
 }
 
 /* 미디어 쿼리를 사용하여 초기 창 크기에 대한 스타일 조정 */
 @media screen and (max-width: 768px) {
-  #movieCard {
+  .movieCard {
     max-width: 90%; /* 작은 화면에 대한 최대 너비 설정 */
   }
 
-  #movieInfo {
-    font-size: 3vw; /* 작은 화면에 대한 폰트 크기 설정 */
+  .movieCard img {
+    max-width: 50%; /* 작은 화면에 대한 영화 포스터 크기 조정 */
+  }
+
+  .movieInfo {
+    text-align: center; /* 작은 화면에서 가운데 정렬로 변경 */
+    font-size: 1.5rem; /* 작은 화면에서 폰트 크기 증가 */
   }
 }
-/* // */

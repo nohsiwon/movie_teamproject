@@ -17,10 +17,10 @@ fetch(`https://api.themoviedb.org/3/movie/${movieId}`, options)
   })
   .then((movie) => {
     // 페이지에 영화 데이터 표시하기
-    const movieTitle = document.getElementById('movieTitle');
-    const movieImage = document.getElementById('movieImage');
-    const movieRating = document.getElementById('movieRating');
-    const movieOverview = document.getElementById('movieOverview');
+    const movieTitle = document.querySelector('.movieTitle');
+    const movieImage = document.querySelector('.movieImage');
+    const movieRating = document.querySelector('.movieRating');
+    const movieOverview = document.querySelector('.movieOverview');
 
     movieTitle.textContent = movie.title;
     movieImage.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
@@ -29,4 +29,3 @@ fetch(`https://api.themoviedb.org/3/movie/${movieId}`, options)
     movieOverview.textContent = movie.overview;
   })
   .catch((e) => console.log('오류났습니다! 아쉽네요'));
-//test

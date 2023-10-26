@@ -4,15 +4,96 @@
     <meta charset="UTF-8" />
     <title>Movie Detail</title>
     <link rel="stylesheet" href="movieDetail.css" />
+    <link rel="stylesheet" href="reviewStyle.css" />
   </head>
   <body>
-    <div id="movieCard">
-      <img id="movieImage" alt="" />
-      <div id="movieInfo">
-        <h1 id="movieTitle"></h1>
-        <p id="movieRating"></p>
-        <p id="movieOverview"></p>
+    <div class="movieCard">
+      <img class="movieImage" alt="" />
+      <div class="movieInfo">
+        <h1 class="movieTitle"></h1>
+        <p class="movieRating"></p>
+        <p class="movieOverview"></p>
       </div>
+    </div>
+    <div class="reviewCard">
+      <h3>영화 리뷰</h3>
+      <form name="f">
+        <table id="t1">
+          <tr>
+            <th>작성자</th>
+            <td><input type="text" name="writer" id="writer" /></td>
+          </tr>
+          <tr>
+            <th>글 비밀번호</th>
+            <td><input type="password" name="pwd" id="pwd" /></td>
+          </tr>
+          <tr>
+            <th>내용</th>
+            <td><input type="text" name="content" id="content" /></td>
+          </tr>
+          <tr>
+            <th>별점</th>
+            <td>
+              <select class="form-select" id="star">
+                <option value="별점선택">별점선택</option>
+                <option value="⭐">⭐</option>
+                <option value="⭐⭐">⭐⭐</option>
+                <option value="⭐⭐⭐">⭐⭐⭐</option>
+                <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
+                <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <th>작성</th>
+            <td><input type="button" value="작성" onclick="a()" /></td>
+          </tr>
+        </table>
+        <div id="error" style="color: red"></div>
+        <!-- Error message div -->
+      </form>
+
+      <h3>글 목록</h3>
+      <div id="list">
+        <!-- 새로 생길 요소의 자리를 미리 만들어놓음 -->
+      </div>
+
+      <!-- 수정 폼 -->
+      <table id="editf" style="display: none">
+        <tr>
+          <th>작성자</th>
+          <td><input type="text" name="editwriter" id="editwriter" /></td>
+        </tr>
+        <tr>
+          <th>글 비밀번호</th>
+          <td><input type="password" name="editpwd" id="editpwd" /></td>
+        </tr>
+        <tr>
+          <th>내용</th>
+          <td><input type="text" name="editcontent" id="editcontent" /></td>
+        </tr>
+        <tr>
+          <th>별점</th>
+          <td>
+            <select class="form-select" id="editstar">
+              <option value="별점선택">별점선택</option>
+              <option value="⭐">⭐</option>
+              <option value="⭐⭐">⭐⭐</option>
+              <option value="⭐⭐⭐">⭐⭐⭐</option>
+              <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
+              <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>작성</th>
+          <td>
+            <input type="button" value="수정완료" id="editbtn" onclick="edit()" />
+            <input type="button" value="취소" onclick="cancel()" />
+          </td>
+        </tr>
+      </table>
+      <script src="reviewScript.js"></script>
     </div>
     <script src="movieDetail.js"></script>
   </body>

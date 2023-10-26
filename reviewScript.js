@@ -1,19 +1,8 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>영화 리뷰</title>
-    <style>
-      #t1,
-      div {
-        border: 1px solid black;
-      }
-    </style>
-    <script>
-      let cnt = 1; // 글번호로 할당
-      let movieId = 123;
-      /* 작성 ----------------------------------------------------------*/
-      function a() {
+
+    let cnt = 1;   // 글번호로 할당
+
+    /* 작성 ----------------------------------------------------------*/
+    function a() {
         let writer = f.writer.value.trim();
         let pwd = f.pwd.value.trim();
         let content = f.content.value;
@@ -118,8 +107,8 @@
         // 버튼에 cnt 속성을 추가해서 수정 글번호를 저장
         document.getElementById('editbtn').cnt = cnt;
 
-        editForm.style.display = ''; // 화면에 수정폼이 나타나게 하기
-      }
+        editForm.style.display = 'block'; // 화면에 수정폼이 나타나게 하기
+    }
 
       /* 1-2. 수정 완료하기 -----------------------------------------------*/
       function edit() {
@@ -193,6 +182,7 @@
         // 해당 글번호를 가진 글 삭제
         posts = posts.filter((post, index) => index !== cnt - 1);
         localStorage.setItem('posts', JSON.stringify(posts));
+<<<<<<< HEAD:review.html
       }
     </script>
   </head>
@@ -276,3 +266,6 @@
     </table>
   </body>
 </html>
+=======
+    }
+>>>>>>> f57545d7f71d9bc9add1f96c23cffaa7c67d1329:reviewScript.js
