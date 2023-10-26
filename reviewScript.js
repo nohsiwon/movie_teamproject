@@ -3,6 +3,7 @@ let cnt = 1; // 글번호로 할당
 /* 작성 ----------------------------------------------------------*/
 function a() {
   console.log(movieId);
+
   let writer = f.writer.value.trim();
   let pwd = f.pwd.value.trim();
   let content = f.content.value;
