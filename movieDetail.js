@@ -1,5 +1,5 @@
 // URL에서 movieId 가져오기
-const urlParams = new URLSearchParams(window.location.search);
+const urlParams = new URLSearchParams(window.location.search);https://github.com/nohsiwon/teamProject/pulls
 const movieId = urlParams.get('id');
 
 // API에서 영화 데이터 가져오기
@@ -22,6 +22,7 @@ fetch(`https://api.themoviedb.org/3/movie/${movieId}`, options)
     const movieRating = document.querySelector('.movieRating');
     const movieOverview = document.querySelector('.movieOverview');
 
+
     movieTitle.textContent = movie.title;
     movieImage.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
     movieImage.alt = movie.title;
@@ -29,3 +30,4 @@ fetch(`https://api.themoviedb.org/3/movie/${movieId}`, options)
     movieOverview.textContent = movie.overview;
   })
   .catch((e) => console.log('오류났습니다! 아쉽네요'));
+
