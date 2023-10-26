@@ -14,46 +14,6 @@
         <p id="movieOverview"></p>
       </div>
     </div>
-
-    <div>
-      <div className="detail_page">
-        <div className="detail_info">
-          <h1>{title}</h1>
-          {/* <img width="300" src="{posterUrl}" /> */} {/*
-          <div>줄거리 : {plot}</div>
-          */}
-          <h3>개봉일: {released}</h3>
-          <h3>감독 : {director}</h3>
-          {/*
-          <h3>배우 : {casts}</h3>
-          */}
-          <h3>배우 : {casts? casts.map(cast => <span>{cast} </span>):null}</h3>
-          <h3>장르 : {genres}</h3>
-          <h3>상영 여부 : {screenStatus}</h3>
-          <h3>상영시간 : {runtime}</h3>
-          <h3>관람객 평점 : {visitorRating}</h3>
-          <h3>전문가 평점 : {expertRating}</h3>
-
-          <h3>예매율: {advanceRate}</h3>
-          <h3>예매율 순위 : {advanceRateRank}</h3>
-        </div>
-
-        <div className="posterImg">
-          <img className="postImg" src="{posterUrl}" />
-        </div>
-      </div>
-
-      <div className="detail_page">
-        <div className="plot_div">
-          <h2>줄거리</h2>
-          <h3>{plot}</h3>
-        </div>
-      </div>
-    </div>
-
     <script src="movieDetail.js"></script>
-
-    <!-----reveiw html 넣는 구간-->
   </body>
 </html>
-<!-- test -->
