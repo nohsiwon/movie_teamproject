@@ -242,7 +242,7 @@ function updateLocalStorage(cnt, newWriter, newcontent, newstar) {
 /* 1-3. 수정 취소하기 ----------------------------------------------*/
 function cancel() {
   let editForm = document.getElementById('editf'); // 수정폼div를 변수에 담기
-  editForm.style.display = 'none'; // 화면에 사라지게 하고 자리 뺌
+  editForm.classList.toggle('editf'); // 화면에 사라지게 하고 자리 뺌
   // 수정글에 붙여놓은 수정폼을 다시 <body>로 돌려놓음 (원래 자리)
   document.getElementsByTagName('body')[0].appendChild(editForm);
 }
