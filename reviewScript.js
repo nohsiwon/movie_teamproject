@@ -39,7 +39,7 @@ function writing() {
   let star = f.star.value;
   let errorDiv = document.getElementById('error');
 
-  // Validate 작성자 and 글 비밀번호
+  // 작성자, 글 비밀번호, 내용, 별점선택 유효성검사
   if (writer.length < 2) {
     errorDiv.textContent = '작성자는 두 글자 이상 입력해주세요.';
     return;
@@ -48,15 +48,25 @@ function writing() {
     errorDiv.textContent = '글 비밀번호는 네 자리 이상 입력해주세요.';
     return;
   }
+  if (content.length < 2) {
+    errorDiv.textContent = '내용은 두 글자 이상 입력해주세요.';
+    return;
+  }
+  if (star === '별점선택') {
+    errorDiv.textContent = '별점을 선택해주세요.';
+    return;
+  }
 
-  // Clear error message
+  // 오류 메시지 지우기
   errorDiv.textContent = '';
+
 
   // 현재 시간을 가져오기
   const timestamp = new Date(); // 현재 시간으로 설정
 
   // Rest of your code to create the review and save to local storage
   let el = makeDiv(writer, pwd, content, star, new Date());
+
   let list = document.getElementById('list');
   list.appendChild(el);
 
@@ -74,11 +84,26 @@ function writing() {
 function makeDiv(writer, pwd, content, star, timestamp) {
   /*-- 1. <div id="d_1" pwd='1111'></div> ------------------------*/
   let newDiv = document.createElement('div'); // 새 <div> 태그 생성
+  newDiv.classList = 'commentBox';
   newDiv.id = 'd_' + cnt; // 생성한 div에 id 지정. d_1, d_2 ...
   newDiv.pwd = pwd; // 사용자가 입력한 pwd값을 파라미터로 받아 할당.
   const timeAgo = elapsedTime(timestamp); // 작성 시간을 계산
 
+  //   <div class="commentUserBox">
+  //   <div class="commentUser">
+  //     <div id='w_${cnt}'>${writer}</div>
+  //     <div id='s_${cnt}'>${star}</div>
+  //   </div>
+  //   <div class="comments">
+  //     <div id='c_${cnt}'>${content}</div>
+  //     <div class='buttonBox'>
+  //       <div onclick=editForm(${cnt})>수정</div>
+  //       <div onclick=del(${cnt})>삭제</div>
+  //     </div>
+  //   </div>
+  // </div>
   /*-- 2. <div>태그의 innerHTML 값 넣어주기 --------------------------*/
+
   let html = '';
   html += `작성 시간:<span id='time_${cnt}'>${timeAgo}</span><br/>`;
   html += "작성자:<span id='w_" + cnt + "'>" + writer + '</span><br/>';
@@ -86,6 +111,22 @@ function makeDiv(writer, pwd, content, star, timestamp) {
   html += "별점:<span id='s_" + cnt + "'>" + star + '</span><br/>';
   html += "<input type='button' value='수정' onclick=editForm(" + cnt + ')>';
   html += "<input type='button' value='삭제' onclick=del(" + cnt + ')>';
+
+  let html = `
+ 
+
+  <div class="commentUserBox2">
+    <div class='commentUser'>
+        <div id='s_${cnt}'>${star}</div>
+        <div class='comment2' id='c_${cnt}'>${content}</div>
+        <div class='user' id='w_${cnt}'>${writer}</div>
+      </div>
+      <div class='buttonBox'>
+        <div class='BtnStyle' onclick=editForm(${cnt})>수정</div>
+        <div class='BtnStyle' onclick=del(${cnt})>삭제</div>
+      </div>
+  </div>
+  
   newDiv.innerHTML = html;
   cnt++;
   return newDiv;
@@ -114,6 +155,8 @@ window.onload = function () {
 function loadFromLocalStorage() {
   let list = document.getElementById('list');
   let posts = JSON.parse(localStorage.getItem('posts')) || [];
+  list.innerHTML = ''; // 기존 목록을 초기화
+
   for (let i = 0; i < posts.length; i++) {
     let post = posts[i];
     // 영화 ID에 따라 필터링
@@ -146,7 +189,10 @@ function editForm(cnt) {
   // 버튼에 cnt 속성을 추가해서 수정 글번호를 저장
   document.getElementById('editbtn').cnt = cnt;
 
-  editForm.style.display = 'block'; // 화면에 수정폼이 나타나게 하기
+  // 0.03초후에 클래스 추가/제거로 애니메이션효과 추가
+  setTimeout(() => {
+    editForm.classList.toggle('editf');
+  }, 30);
 }
 
 /* 1-2. 수정 완료하기 -----------------------------------------------*/
