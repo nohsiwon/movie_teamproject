@@ -2,5 +2,21 @@
 div {
   border: 1px solid black;
 }
+.card {
+  margin-top: 20px; }
 
+/* 영화 리뷰 카드 스타일 */
+.reviewCard {
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 박스 그림자 추가 */
+  margin-bottom: 20px; /* 영화 리뷰와 COMMENT 사이 간격 설정 */
+  padding: 20px; /* 영화 리뷰 카드 내부 여백 설정 */
+}
+
+/* COMMENT 카드 스타일 */
+.card {
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 박스 그림자 추가 */
+  padding: 20px; /* COMMENT 카드 내부 여백 설정 */
+}
 

@@ -30,7 +30,7 @@
             <td><input type="text" name="writer" id="writer" /></td>
           </tr>
           <tr>
-            <th>글 비밀번호</th>
+            <th>비밀번호</th>
             <td><input type="password" name="pwd" id="pwd" /></td>
           </tr>
           <tr>
@@ -59,10 +59,17 @@
         <!-- Error message div -->
       </form>
 
-      <h3>글 목록</h3>
+
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+      <h3>COMMENT</h3>
       <div id="list">
         <!-- 새로 생길 요소의 자리를 미리 만들어놓음 -->
       </div>
+    </div>
+  </div>
+
 
       <!-- 수정 폼 -->
       <table id="editf" style="display: none">
@@ -71,7 +78,7 @@
           <td><input type="text" name="editwriter" id="editwriter" /></td>
         </tr>
         <tr>
-          <th>글 비밀번호</th>
+          <th>비밀번호</th>
           <td><input type="password" name="editpwd" id="editpwd" /></td>
         </tr>
         <tr>
