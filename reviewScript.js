@@ -88,13 +88,19 @@ function makeDiv(writer, pwd, content, star, timestamp) {
   const timeAgo = elapsedTime(timestamp); // 작성 시간을 계산
 
   /*-- 2. <div>태그의 innerHTML 값 넣어주기 --------------------------*/
-  let html = '';
-  html += `작성 시간:<span id='time_${cnt}'>${timeAgo}</span><br/>`;
-  html += `작성자:<span id='w_${cnt}'>${writer}</span><br/>`;
-  html += `내용:<span id='c_${cnt}'>${content}</span><br/>`;
-  html += `별점:<span id='s_${cnt}'>${star}</span><br/>`;
-  html += `<input type='button' value='수정' onclick="editForm(${cnt})">`;
-  html += `<input type='button' value='삭제' onclick="del(${cnt})">`;
+  let html = `
+  <div class="commentUserBox2">
+    <div class='commentUser'>
+        <div id='s_${cnt}'>${star}</div>
+        <div class='comment2' id='c_${cnt}'>${content}</div>
+        <div class='user' id='w_${cnt}'>${writer}</div>
+      </div>
+      <div class='buttonBox'>
+        <div class='BtnStyle' onclick=editForm(${cnt})>수정</div>
+        <div class='BtnStyle' onclick=del(${cnt})>삭제</div>
+      </div>
+  </div>
+  `;
   newDiv.innerHTML = html;
   cnt++;
   return newDiv;
