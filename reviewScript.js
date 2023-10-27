@@ -14,7 +14,7 @@ function writing() {
   let star = f.star.value;
   let errorDiv = document.getElementById('error');
 
-  // 작성자, 글 비밀번호, 내용 유효성검사
+  // 작성자, 글 비밀번호, 내용, 별점선택 유효성검사
   if (writer.length < 2) {
     errorDiv.textContent = '작성자는 두 글자 이상 입력해주세요.';
     return;
@@ -25,6 +25,11 @@ function writing() {
   }
   if (content.length <2) {
     errorDiv.textContent = '내용은 두 글자 이상 입력해주세요.';
+    return;
+  }
+  if (star === "별점선택") {
+    errorDiv.textContent = '별점을 선택해주세요.';
+    return;
   }
 
 // 오류 메시지 지우기
