@@ -1,3 +1,28 @@
+// 시간을 표시하는 함수
+const elapsedTime = (date) => {
+  date = new Date(date);
+  if (!(date instanceof Date) || isNaN(date)) {
+    return '작성 시간 미정'; // 날짜가 유효하지 않으면 특별한 문자열 반환
+  }
+
+  const start = new Date(date);
+  const end = new Date();
+
+  const seconds = Math.floor((end.getTime() - start.getTime()) / 1000);
+  if (seconds < 60) return '방금 전';
+
+  const minutes = seconds / 60;
+  if (minutes < 60) return `${Math.floor(minutes)}분 전`;
+
+  const hours = minutes / 60;
+  if (hours < 24) return `${Math.floor(hours)}시간 전`;
+
+  const days = hours / 24;
+  if (days < 7) return `${Math.floor(days)}일 전`;
+
+  return start.toLocaleDateString();
+};
+
 let cnt = 1; // 글번호로 할당
 
 // URL에서 movieId 가져오기
@@ -27,8 +52,11 @@ function writing() {
   // Clear error message
   errorDiv.textContent = '';
 
+  // 현재 시간을 가져오기
+  const timestamp = new Date(); // 현재 시간으로 설정
+
   // Rest of your code to create the review and save to local storage
-  let el = makeDiv(writer, pwd, content, star);
+  let el = makeDiv(writer, pwd, content, star, new Date());
   let list = document.getElementById('list');
   list.appendChild(el);
 
@@ -39,31 +67,32 @@ function writing() {
   f.star.value = '별점선택';
 
   // 글 작성이 완료된 후 글 내용을 로컬 스토리지에 저장
-  saveToLocalStorage(writer, pwd, content, star);
+  saveToLocalStorage(writer, pwd, content, star, timestamp); // 시간 정보를 저장
 }
 
 /* 글<div> 생성 ----------------------------------------------------*/
-function makeDiv(writer, pwd, content, star) {
+function makeDiv(writer, pwd, content, star, timestamp) {
   /*-- 1. <div id="d_1" pwd='1111'></div> ------------------------*/
   let newDiv = document.createElement('div'); // 새 <div> 태그 생성
   newDiv.id = 'd_' + cnt; // 생성한 div에 id 지정. d_1, d_2 ...
   newDiv.pwd = pwd; // 사용자가 입력한 pwd값을 파라미터로 받아 할당.
+  const timeAgo = elapsedTime(timestamp); // 작성 시간을 계산
 
   /*-- 2. <div>태그의 innerHTML 값 넣어주기 --------------------------*/
   let html = '';
+  html += `작성 시간:<span id='time_${cnt}'>${timeAgo}</span><br/>`;
   html += "작성자:<span id='w_" + cnt + "'>" + writer + '</span><br/>';
   html += "내용:<span id='c_" + cnt + "'>" + content + '</span><br/>';
   html += "별점:<span id='s_" + cnt + "'>" + star + '</span><br/>';
   html += "<input type='button' value='수정' onclick=editForm(" + cnt + ')>';
   html += "<input type='button' value='삭제' onclick=del(" + cnt + ')>';
   newDiv.innerHTML = html;
-
   cnt++;
   return newDiv;
 }
 
 /* 작성한 글을 로컬 스토리지에 저장 */
-function saveToLocalStorage(writer, pwd, content, star) {
+function saveToLocalStorage(writer, pwd, content, star, timestamp) {
   let posts = JSON.parse(localStorage.getItem('posts')) || [];
   let post = {
     writer: writer,
@@ -71,6 +100,7 @@ function saveToLocalStorage(writer, pwd, content, star) {
     content: content,
     star: star,
     movieId: movieId, // 영화 ID 추가
+    timestamp: new Date(),
   };
   posts.push(post);
   localStorage.setItem('posts', JSON.stringify(posts));
@@ -88,7 +118,8 @@ function loadFromLocalStorage() {
     let post = posts[i];
     // 영화 ID에 따라 필터링
     if (post.movieId === movieId) {
-      let el = makeDiv(post.writer, post.pwd, post.content, post.star);
+      console.log('시간', post.timestamp);
+      let el = makeDiv(post.writer, post.pwd, post.content, post.star, post.timestamp);
       list.appendChild(el);
     }
   }
