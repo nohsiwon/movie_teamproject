@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BSANG MOVIE</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="card">
+      <header class="header">
+        <div class="innerHeader">
+          <div class="title">BSANG MOVIE</div>
+
+          <span id="theme_toggler">
+            <input type="button" value="night" id="change" />
+          </span>
+
+          <div class="searchBox">
+            <input type="text" id="result" placeholder="검색해주세요" />
+            <div id="searchIcon">🍳</div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <div class="contentBox">
+          <div class="sortBox">
+            <div class="sortByTitle">이름순 정렬</div>
+            <div class="sortByPopul">인기순 정렬</div>
+          </div>
+          <div class="movies"></div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="footerInner">copyright</div>
+      </footer>
+    </div>
+  </body>
+  <script src="index.js"></script>
+  <script src="search.js"></script>
+  <script src="darkMode.js"></script>
+</html>
