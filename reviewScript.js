@@ -1,7 +1,11 @@
 let cnt = 1; // 글번호로 할당
 
+// URL에서 movieId 가져오기
+
+console.log(movieId);
+
 /* 작성 ----------------------------------------------------------*/
-function a() {
+function writing() {
   console.log(movieId);
 
   let writer = f.writer.value.trim();
@@ -10,7 +14,7 @@ function a() {
   let star = f.star.value;
   let errorDiv = document.getElementById('error');
 
-  // Validate 작성자 and 글 비밀번호
+  // 작성자, 글 비밀번호, 내용 유효성검사
   if (writer.length < 2) {
     errorDiv.textContent = '작성자는 두 글자 이상 입력해주세요.';
     return;
@@ -19,11 +23,14 @@ function a() {
     errorDiv.textContent = '글 비밀번호는 네 자리 이상 입력해주세요.';
     return;
   }
+  if (content.length <2) {
+    errorDiv.textContent = '내용은 두 글자 이상 입력해주세요.';
+  }
 
-  // Clear error message
+// 오류 메시지 지우기
   errorDiv.textContent = '';
 
-  // Rest of your code to create the review and save to local storage
+  // 리뷰를 생성하고 로컬 저장소에 저장하기 위한 나머지 코드
   let el = makeDiv(writer, pwd, content, star);
   let list = document.getElementById('list');
   list.appendChild(el);
@@ -46,12 +53,13 @@ function makeDiv(writer, pwd, content, star) {
   newDiv.pwd = pwd; // 사용자가 입력한 pwd값을 파라미터로 받아 할당.
 
   /*-- 2. <div>태그의 innerHTML 값 넣어주기 --------------------------*/
-  let html = '';
-  html += "작성자:<span id='w_" + cnt + "'>" + writer + '</span><br/>';
-  html += "내용:<span id='c_" + cnt + "'>" + content + '</span><br/>';
-  html += "별점:<span id='s_" + cnt + "'>" + star + '</span><br/>';
-  html += "<input type='button' value='수정' onclick=editForm(" + cnt + ')>';
-  html += "<input type='button' value='삭제' onclick=del(" + cnt + ')>';
+  let html = `
+  작성자:<span id='w_${cnt}'>${writer}</span><br/>
+  내용:<span id='c_${cnt}'>${content}</span><br/>
+  별점:<span id='s_${cnt}'>${star}</span><br/>
+  <input type='button' value='수정' onclick=editForm(${cnt})>
+  <input type='button' value='삭제' onclick=del(${cnt})>
+  `;
   newDiv.innerHTML = html;
 
   cnt++;
@@ -66,6 +74,7 @@ function saveToLocalStorage(writer, pwd, content, star) {
     pwd: pwd,
     content: content,
     star: star,
+    movieId: movieId, // 영화 ID 추가
   };
   posts.push(post);
   localStorage.setItem('posts', JSON.stringify(posts));
@@ -79,12 +88,18 @@ window.onload = function () {
 function loadFromLocalStorage() {
   let list = document.getElementById('list');
   let posts = JSON.parse(localStorage.getItem('posts')) || [];
+  list.innerHTML = ''; // 기존 목록을 초기화
+
   for (let i = 0; i < posts.length; i++) {
     let post = posts[i];
-    let el = makeDiv(post.writer, post.pwd, post.content, post.star);
-    list.appendChild(el);
+    // 영화 ID에 따라 필터링
+    if (post.movieId === movieId) {
+      let el = makeDiv(post.writer, post.pwd, post.content, post.star);
+      list.appendChild(el);
+    }
   }
 }
+
 
 /* 1-1. 수정 폼 보여주기 (이전에 작성한 내용과 함께) ------------------------*/
 function editForm(cnt) {
