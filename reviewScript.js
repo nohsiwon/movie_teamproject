@@ -23,16 +23,16 @@ function writing() {
     errorDiv.textContent = '글 비밀번호는 네 자리 이상 입력해주세요.';
     return;
   }
-  if (content.length <2) {
+  if (content.length < 2) {
     errorDiv.textContent = '내용은 두 글자 이상 입력해주세요.';
     return;
   }
-  if (star === "별점선택") {
+  if (star === '별점선택') {
     errorDiv.textContent = '별점을 선택해주세요.';
     return;
   }
 
-// 오류 메시지 지우기
+  // 오류 메시지 지우기
   errorDiv.textContent = '';
 
   // 리뷰를 생성하고 로컬 저장소에 저장하기 위한 나머지 코드
@@ -94,7 +94,7 @@ function loadFromLocalStorage() {
   let list = document.getElementById('list');
   let posts = JSON.parse(localStorage.getItem('posts')) || [];
   list.innerHTML = ''; // 기존 목록을 초기화
-
+  console.log(posts);
   for (let i = 0; i < posts.length; i++) {
     let post = posts[i];
     // 영화 ID에 따라 필터링
@@ -104,7 +104,6 @@ function loadFromLocalStorage() {
     }
   }
 }
-
 
 /* 1-1. 수정 폼 보여주기 (이전에 작성한 내용과 함께) ------------------------*/
 function editForm(cnt) {
