@@ -34,9 +34,9 @@ fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=ko-KR`, options)
     movieGenres.textContent = `장르: ${movie.genres.map((genre) => genre.name).join(', ')}`;
     movieOriginalLanguage.textContent = `언어: ${movie.original_language}`;
     movieReleaseDate.textContent = `개봉일: ${movie.release_date}`;
-    movieVoteCount.textContent = `관객: ${movie.vote_count}`;
-    movieRuntime.textContent = `상영시간: ${movie.runtime} 분`;
-    movieRating.textContent = `순위: ${movie.vote_average}`;
+    movieVoteCount.textContent = `관객: ${movie.vote_count}천명`;
+    movieRuntime.textContent = `상영시간: ${movie.runtime}분`;
+    movieRating.textContent = `순위: ${movie.vote_average}위`;
     movieOverview.textContent = movie.overview;
   })
   .catch((e) => console.log('오류났습니다! 아쉽네요'));
