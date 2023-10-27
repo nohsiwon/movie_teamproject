@@ -90,11 +90,11 @@ function makeDiv(writer, pwd, content, star, timestamp) {
   /*-- 2. <div>태그의 innerHTML 값 넣어주기 --------------------------*/
   let html = '';
   html += `작성 시간:<span id='time_${cnt}'>${timeAgo}</span><br/>`;
-  html += "작성자:<span id='w_" + cnt + "'>" + writer + '</span><br/>';
-  html += "내용:<span id='c_" + cnt + "'>" + content + '</span><br/>';
-  html += "별점:<span id='s_" + cnt + "'>" + star + '</span><br/>';
-  html += "<input type='button' value='수정' onclick=editForm(" + cnt + ')>';
-  html += "<input type='button' value='삭제' onclick=del(" + cnt + ')>';
+  html += `작성자:<span id='w_${cnt}'>${writer}</span><br/>`;
+  html += `내용:<span id='c_${cnt}'>${content}</span><br/>`;
+  html += `별점:<span id='s_${cnt}'>${star}</span><br/>`;
+  html += `<input type='button' value='수정' onclick="editForm(${cnt})">`;
+  html += `<input type='button' value='삭제' onclick="del(${cnt})">`;
   newDiv.innerHTML = html;
   cnt++;
   return newDiv;
