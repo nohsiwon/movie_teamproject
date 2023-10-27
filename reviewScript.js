@@ -73,8 +73,6 @@ function makeDiv(writer, pwd, content, star) {
   // </div>
   /*-- 2. <div>태그의 innerHTML 값 넣어주기 --------------------------*/
   let html = `
- 
-
   <div class="commentUserBox2">
     <div class='commentUser'>
         <div id='s_${cnt}'>${star}</div>
@@ -86,8 +84,6 @@ function makeDiv(writer, pwd, content, star) {
         <div class='BtnStyle' onclick=del(${cnt})>삭제</div>
       </div>
   </div>
-
- 
   `;
   newDiv.innerHTML = html;
 
