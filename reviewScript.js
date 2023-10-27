@@ -23,16 +23,16 @@ function writing() {
     errorDiv.textContent = '글 비밀번호는 네 자리 이상 입력해주세요.';
     return;
   }
-  if (content.length <2) {
+  if (content.length < 2) {
     errorDiv.textContent = '내용은 두 글자 이상 입력해주세요.';
     return;
   }
-  if (star === "별점선택") {
+  if (star === '별점선택') {
     errorDiv.textContent = '별점을 선택해주세요.';
     return;
   }
 
-// 오류 메시지 지우기
+  // 오류 메시지 지우기
   errorDiv.textContent = '';
 
   // 리뷰를 생성하고 로컬 저장소에 저장하기 위한 나머지 코드
@@ -54,16 +54,40 @@ function writing() {
 function makeDiv(writer, pwd, content, star) {
   /*-- 1. <div id="d_1" pwd='1111'></div> ------------------------*/
   let newDiv = document.createElement('div'); // 새 <div> 태그 생성
+  newDiv.classList = 'commentBox';
   newDiv.id = 'd_' + cnt; // 생성한 div에 id 지정. d_1, d_2 ...
   newDiv.pwd = pwd; // 사용자가 입력한 pwd값을 파라미터로 받아 할당.
 
+  //   <div class="commentUserBox">
+  //   <div class="commentUser">
+  //     <div id='w_${cnt}'>${writer}</div>
+  //     <div id='s_${cnt}'>${star}</div>
+  //   </div>
+  //   <div class="comments">
+  //     <div id='c_${cnt}'>${content}</div>
+  //     <div class='buttonBox'>
+  //       <div onclick=editForm(${cnt})>수정</div>
+  //       <div onclick=del(${cnt})>삭제</div>
+  //     </div>
+  //   </div>
+  // </div>
   /*-- 2. <div>태그의 innerHTML 값 넣어주기 --------------------------*/
   let html = `
-  작성자:<span id='w_${cnt}'>${writer}</span><br/>
-  내용:<span id='c_${cnt}'>${content}</span><br/>
-  별점:<span id='s_${cnt}'>${star}</span><br/>
-  <input type='button' value='수정' onclick=editForm(${cnt})>
-  <input type='button' value='삭제' onclick=del(${cnt})>
+ 
+
+  <div class="commentUserBox2">
+    <div class='commentUser'>
+        <div id='s_${cnt}'>${star}</div>
+        <div class='comment2' id='c_${cnt}'>${content}</div>
+        <div class='user' id='w_${cnt}'>${writer}</div>
+      </div>
+      <div class='buttonBox'>
+        <div class='BtnStyle' onclick=editForm(${cnt})>수정</div>
+        <div class='BtnStyle' onclick=del(${cnt})>삭제</div>
+      </div>
+  </div>
+
+ 
   `;
   newDiv.innerHTML = html;
 
@@ -105,7 +129,6 @@ function loadFromLocalStorage() {
   }
 }
 
-
 /* 1-1. 수정 폼 보여주기 (이전에 작성한 내용과 함께) ------------------------*/
 function editForm(cnt) {
   let editDiv = document.getElementById('d_' + cnt); // 수정할 글의 div
@@ -127,7 +150,10 @@ function editForm(cnt) {
   // 버튼에 cnt 속성을 추가해서 수정 글번호를 저장
   document.getElementById('editbtn').cnt = cnt;
 
-  editForm.style.display = 'block'; // 화면에 수정폼이 나타나게 하기
+  // 0.03초후에 클래스 추가/제거로 애니메이션효과 추가
+  setTimeout(() => {
+    editForm.classList.toggle('editf');
+  }, 30);
 }
 
 /* 1-2. 수정 완료하기 -----------------------------------------------*/
