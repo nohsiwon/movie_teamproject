@@ -1,3 +1,28 @@
+// 시간을 표시하는 함수
+const elapsedTime = (date) => {
+  date = new Date(date);
+  if (!(date instanceof Date) || isNaN(date)) {
+    return '작성 시간 미정'; // 날짜가 유효하지 않으면 특별한 문자열 반환
+  }
+
+  const start = new Date(date);
+  const end = new Date();
+
+  const seconds = Math.floor((end.getTime() - start.getTime()) / 1000);
+  if (seconds < 60) return '방금 전';
+
+  const minutes = seconds / 60;
+  if (minutes < 60) return `${Math.floor(minutes)}분 전`;
+
+  const hours = minutes / 60;
+  if (hours < 24) return `${Math.floor(hours)}시간 전`;
+
+  const days = hours / 24;
+  if (days < 7) return `${Math.floor(days)}일 전`;
+
+  return start.toLocaleDateString();
+};
+
 let cnt = 1; // 글번호로 할당
 
 // URL에서 movieId 가져오기
@@ -23,20 +48,24 @@ function writing() {
     errorDiv.textContent = '글 비밀번호는 네 자리 이상 입력해주세요.';
     return;
   }
-  if (content.length <2) {
+  if (content.length < 2) {
     errorDiv.textContent = '내용은 두 글자 이상 입력해주세요.';
     return;
   }
-  if (star === "별점선택") {
+  if (star === '별점선택') {
     errorDiv.textContent = '별점을 선택해주세요.';
     return;
   }
 
-// 오류 메시지 지우기
+  // 오류 메시지 지우기
   errorDiv.textContent = '';
 
-  // 리뷰를 생성하고 로컬 저장소에 저장하기 위한 나머지 코드
-  let el = makeDiv(writer, pwd, content, star);
+  // 현재 시간을 가져오기
+  const timestamp = new Date(); // 현재 시간으로 설정
+
+  // Rest of your code to create the review and save to local storage
+  let el = makeDiv(writer, pwd, content, star, new Date());
+
   let list = document.getElementById('list');
   list.appendChild(el);
 
@@ -47,32 +76,41 @@ function writing() {
   f.star.value = '별점선택';
 
   // 글 작성이 완료된 후 글 내용을 로컬 스토리지에 저장
-  saveToLocalStorage(writer, pwd, content, star);
+  saveToLocalStorage(writer, pwd, content, star, timestamp); // 시간 정보를 저장
 }
 
 /* 글<div> 생성 ----------------------------------------------------*/
-function makeDiv(writer, pwd, content, star) {
+function makeDiv(writer, pwd, content, star, timestamp) {
   /*-- 1. <div id="d_1" pwd='1111'></div> ------------------------*/
   let newDiv = document.createElement('div'); // 새 <div> 태그 생성
   newDiv.id = 'd_' + cnt; // 생성한 div에 id 지정. d_1, d_2 ...
   newDiv.pwd = pwd; // 사용자가 입력한 pwd값을 파라미터로 받아 할당.
+  const timeAgo = elapsedTime(timestamp); // 작성 시간을 계산
 
   /*-- 2. <div>태그의 innerHTML 값 넣어주기 --------------------------*/
   let html = `
-  작성자:<span id='w_${cnt}'>${writer}</span><br/>
-  내용:<span id='c_${cnt}'>${content}</span><br/>
-  별점:<span id='s_${cnt}'>${star}</span><br/>
-  <input type='button' value='수정' onclick=editForm(${cnt})>
-  <input type='button' value='삭제' onclick=del(${cnt})>
+  <div class="commentUserBox">
+    <div class='commentUser'>
+        <div id='s_${cnt}'>${star}</div>
+        <div class='comment' id='c_${cnt}'>${content}</div>
+        <div class='timeBox'>
+          <div class='user' id='w_${cnt}'>${writer}</div>
+          <div>${timeAgo}</div>
+        </div>
+      </div>
+      <div class='buttonBox'>
+        <div class='BtnStyle' onclick=editForm(${cnt})>수정</div>
+        <div class='BtnStyle' onclick=del(${cnt})>삭제</div>
+      </div>
+  </div>
   `;
   newDiv.innerHTML = html;
-
   cnt++;
   return newDiv;
 }
 
 /* 작성한 글을 로컬 스토리지에 저장 */
-function saveToLocalStorage(writer, pwd, content, star) {
+function saveToLocalStorage(writer, pwd, content, star, timestamp) {
   let posts = JSON.parse(localStorage.getItem('posts')) || [];
   let post = {
     writer: writer,
@@ -80,6 +118,7 @@ function saveToLocalStorage(writer, pwd, content, star) {
     content: content,
     star: star,
     movieId: movieId, // 영화 ID 추가
+    timestamp: new Date(),
   };
   posts.push(post);
   localStorage.setItem('posts', JSON.stringify(posts));
@@ -99,12 +138,12 @@ function loadFromLocalStorage() {
     let post = posts[i];
     // 영화 ID에 따라 필터링
     if (post.movieId === movieId) {
-      let el = makeDiv(post.writer, post.pwd, post.content, post.star);
+      console.log('시간', post.timestamp);
+      let el = makeDiv(post.writer, post.pwd, post.content, post.star, post.timestamp);
       list.appendChild(el);
     }
   }
 }
-
 
 /* 1-1. 수정 폼 보여주기 (이전에 작성한 내용과 함께) ------------------------*/
 function editForm(cnt) {
@@ -127,7 +166,10 @@ function editForm(cnt) {
   // 버튼에 cnt 속성을 추가해서 수정 글번호를 저장
   document.getElementById('editbtn').cnt = cnt;
 
-  editForm.style.display = 'block'; // 화면에 수정폼이 나타나게 하기
+  // 0.03초후에 클래스 추가/제거로 애니메이션효과 추가
+  setTimeout(() => {
+    editForm.classList.toggle('editf');
+  }, 30);
 }
 
 /* 1-2. 수정 완료하기 -----------------------------------------------*/
@@ -177,7 +219,7 @@ function updateLocalStorage(cnt, newWriter, newcontent, newstar) {
 /* 1-3. 수정 취소하기 ----------------------------------------------*/
 function cancel() {
   let editForm = document.getElementById('editf'); // 수정폼div를 변수에 담기
-  editForm.style.display = 'none'; // 화면에 사라지게 하고 자리 뺌
+  editForm.classList.toggle('editf'); // 화면에 사라지게 하고 자리 뺌
   // 수정글에 붙여놓은 수정폼을 다시 <body>로 돌려놓음 (원래 자리)
   document.getElementsByTagName('body')[0].appendChild(editForm);
 }

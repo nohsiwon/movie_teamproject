@@ -1,20 +1,20 @@
 // 사이트이름
-let title = document.querySelector('.title');
+const title = document.querySelector('.title');
 
 // 검색창(input)
-let value = document.getElementById('result');
+const value = document.getElementById('result');
 
 // 검색아이콘
-let search = document.getElementById('searchIcon');
+const search = document.getElementById('searchIcon');
 
 // 무비 카드의 부모
-let movies = document.querySelector('.movies');
+const movies = document.querySelector('.movies');
 
 // 이름순 정렬 버튼
-let sortByTitle = document.querySelector('.sortByTitle');
+const sortByTitle = document.querySelector('.sortByTitle');
 
 // 인기순 정렬 버튼
-let sortByPopul = document.querySelector('.sortByPopul');
+const sortByPopul = document.querySelector('.sortByPopul');
 
 // 사이트이름 클릭 시 새로고침
 title.addEventListener('click', () => {
@@ -25,20 +25,20 @@ title.addEventListener('click', () => {
 value.focus();
 
 // 영화 제목순 정렬 함수
-let sortTitle = (a, b) => {
+const sortTitle = (a, b) => {
   if (a.title > b.title) return 1;
   if (a.title < b.title) return -1;
   if (a.title === b.title) return 0;
 };
 
 // 영화 인기순 정렬 함수
-let sortpopularity = (a, b) => {
+const sortpopularity = (a, b) => {
   return b.popularity - a.popularity;
 };
 
 // 영화 맵 함수
-let mapMovies = (movie) => {
-  let movieBox = document.createElement('div');
+const mapMovies = (movie) => {
+  const movieBox = document.createElement('div');
   movieBox.className = 'movie';
   movieBox.innerHTML = `
     <div class="movieTitle">${movie.title}</div>
@@ -66,7 +66,7 @@ let mapMovies = (movie) => {
 };
 
 // 검색어와 영화이름과 비교(대문자 ,소문자 상관x)
-let filter = (movie1) => movie1.title.toUpperCase().includes(value.value.toUpperCase());
+const filter = (movie1) => movie1.title.toUpperCase().includes(value.value.toUpperCase());
 
 // API 가져오기
 const options = {
