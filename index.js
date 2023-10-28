@@ -35,13 +35,52 @@ const sortTitle = (a, b) => {
 const sortpopularity = (a, b) => {
   return b.popularity - a.popularity;
 };
+//영화 정보 로컬스토리지에서 불러오기
+let postInfos = JSON.parse(localStorage.getItem('posts')) || [];
+console.log(postInfos);
+const newPostInfos = postInfos.filter((a) => a.movieId !== undefined);
+console.log(newPostInfos);
 
-// 영화 맵 함수
+const onlyInfo = newPostInfos.map((info) => {
+  return { id: info.movieId, star: ToNumber(info.star) };
+});
+
+
+console.log(onlyInfo);
+
+// startToNumber(onlyInfo.star);
+function ToNumber(star) {
+  if (star === '⭐') {
+    return 1;
+  } else if (star === '⭐⭐') {
+    return 2;
+  } else if (star === '⭐⭐⭐') {
+    return 3;
+  } else if (star === '⭐⭐⭐⭐') {
+    return 4;
+  } else if (star === '⭐⭐⭐⭐⭐') {
+    return 5;
+  } else {
+    return 0;
+  }
+}
+
+// 영화 맵 함수⭐ function mapMovie(){}
 const mapMovies = (movie) => {
   const movieBox = document.createElement('div');
+
+  // 평점들의 평균을 계산하기
+  let matchingRatings = onlyInfo.filter((info) => info.id === movie.id.toString());
+  console.log(matchingRatings);
+  let averageRating = matchingRatings.reduce((sum, info) => sum + info.star, 0) / matchingRatings.length;
+
+  // 평균 점수를 소수점 첫번째 자리까지 나타내고, 리뷰가 없는 경우 0점으로 표시
+  averageRating = isNaN(averageRating) ? 0 : averageRating.toFixed(1);
+
+
   movieBox.className = 'movie';
   movieBox.innerHTML = `
-    <div class="movieTitle">${movie.title}</div>
+    <div class="movieTitle">${movie.title} ⭐${averageRating}</div>
       <div class="movieInner">
         <div class="movieImg">
           <img
@@ -82,8 +121,9 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=ko-KR&page=1', opti
   .then((response) => response.json())
   .then((response) => {
     // 모든 영화 표시
+    console.log('원본배열' + response.results);
     response.results.map(mapMovies);
-
+    console.log(response.results.map(mapMovies));
     // 이름순 정렬하기
     sortByTitle.addEventListener('click', () => {
       // 사용한 정렬 버튼 표시

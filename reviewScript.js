@@ -133,7 +133,7 @@ function loadFromLocalStorage() {
   let list = document.getElementById('list');
   let posts = JSON.parse(localStorage.getItem('posts')) || [];
   list.innerHTML = ''; // 기존 목록을 초기화
-
+  console.log(posts);
   for (let i = 0; i < posts.length; i++) {
     let post = posts[i];
     // 영화 ID에 따라 필터링
