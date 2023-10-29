@@ -66,12 +66,13 @@ img {
 /* main */
 
 main {
-  background-color: black;
-  width: 100%;
+  background-color: var;
   min-height: 100vh;
   margin-top: 100px;
   padding: 28px 0;
 }
+
+
 
 .contentBox {
   width: 1280px;
