@@ -1,20 +1,18 @@
+const moonIcon = document.getElementById('moon');
+const sunIcon = document.getElementById('sun');
+const body = document.querySelector('body');
 
-const change = document.querySelector("#change");
-const body = document.querySelector("body");
-
-//화면의 배경화면을 전체 바꿔야하니 body 태그를 불러왔다.
-
-function changeHandle () {
-    if(change.value === "night") {
-        body.classList.add("night");
-        body.classList.remove("day");
-        change.value = "day";
-    } else {
-        body.classList.remove("night");
-        body.classList.add("day");
-        change.value = "night";
-    }
+function toggleTheme() {
+  if (body.classList.contains('dark_mode')) {
+    body.classList.remove('dark_mode');
+    moonIcon.style.display = 'inline';
+    sunIcon.style.display = 'none';
+  } else {
+    body.classList.add('dark_mode');
+    moonIcon.style.display = 'none';
+    sunIcon.style.display = 'inline';
+  }
 }
 
-
-change.addEventListener("click", changeHandle);
+moonIcon.addEventListener('click', toggleTheme);
+sunIcon.addEventListener('click', toggleTheme);
