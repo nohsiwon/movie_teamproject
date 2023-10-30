@@ -94,7 +94,7 @@
 }
 
 #editf {
-  height: 0;
+  height: 0px;
   overflow: hidden;
   margin-top: 0;
   transition: all 0.5s;
