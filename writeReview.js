@@ -63,19 +63,31 @@ function makeDiv(idx, writer, pwd, content, star, timestamp) {
   /*-- 2. <div>태그의 innerHTML 값 넣어주기 --------------------------*/
   newDiv.innerHTML = `
   <div class="commentUserBox">
-    <div class='commentUser'>
-        <div id='s_${idx}'>${star}</div>
+     <div class='commentUser'>
+      <div id='s_${idx}'>${star}</div>
         <div class='comment' id='c_${idx}'>${content}</div>
-        <div class='timeBox'>
+         <div class='timeBox'>
           <div class='user' id='w_${idx}'>${writer}</div>
-          <div>${timeAgo}</div>
+           <div>${timeAgo}</div>
+           <div class= likeDis>
+              <button class="likeBtn">
+               <svg aria-label="좋아요" class="_8-yf5 white" display="none" ....></svg>
+               <svg aria-label="좋아요 취소" class="_8-yf5 red" display="none" ...></svg>
+               <span class="button-text">좋아요</span>
+              </button>
+              <button class="dislikeBtn">
+               <svg aria-label="싫어요" class="_8-yf5 white" display="none" ....></svg>
+               <svg aria-label="싫어요 취소" class="_8-yf5 red" display="none" ...></svg>
+               <span class="button-text">싫어요</span>
+               </button>
+           <div>
         </div>
-      </div>
+    </div>
       <div class='buttonBox'>
         <div class='BtnStyle' onclick=editForm(${idx})>수정</div>
         <div class='BtnStyle' onclick=del(${idx})>삭제</div>
       </div>
-  </div>
+ </div>
   `;
 
   return newDiv;
@@ -84,3 +96,31 @@ function makeDiv(idx, writer, pwd, content, star, timestamp) {
 // '작성' 버튼에 클릭 이벤트 리스너를 추가합니다.
 const submitButton = document.getElementById('submitButton');
 submitButton.addEventListener('click', writing);
+
+// 좋아요와 싫어요 카운트 변수
+let likeCount = 0;
+let dislikeCount = 0;
+
+// '좋아요' 버튼을 동적으로 생성
+const likeButton = document.createElement('button');
+likeButton.textContent = '좋아요';
+
+// '싫어요' 버튼을 동적으로 생성
+const dislikeButton = document.createElement('button');
+dislikeButton.textContent = '싫어요';
+
+// '좋아요' 버튼 클릭 이벤트 핸들러
+likeButton.addEventListener('click', function () {
+  likeCount++; // 좋아요 카운트 증가
+  document.querySelector('.likeCount').textContent = likeCount; // 화면에 좋아요 카운트 업데이트
+});
+
+// '싫어요' 버튼 클릭 이벤트 핸들러
+dislikeButton.addEventListener('click', function () {
+  dislikeCount++; // 싫어요 카운트 증가
+  document.querySelector('.dislikeCount').textContent = dislikeCount; // 화면에 싫어요 카운트 업데이트
+});
+
+// 버튼을 화면에 추가
+likeButtonDiv.appendChild(likeButton);
+likeButtonDiv.appendChild(dislikeButton);
