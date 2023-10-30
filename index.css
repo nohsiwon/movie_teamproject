@@ -66,12 +66,13 @@ img {
 /* main */
 
 main {
-  background-color: black;
-  width: 100%;
+  background-color: var;
   min-height: 100vh;
   margin-top: 100px;
   padding: 28px 0;
 }
+
+
 
 .contentBox {
   width: 1280px;
@@ -88,11 +89,12 @@ main {
 .contentBox .sortBox > div {
   border: 1px solid white;
   border-radius: 10px;
-  color: white;
+  color: var(--text-color); /* CSS 변수를 사용하여 텍스트 색상 지정 */
   padding: 5px;
   font-size: 12px;
   cursor: pointer;
 }
+
 
 .selectSort {
   color: black !important;

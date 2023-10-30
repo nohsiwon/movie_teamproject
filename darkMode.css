@@ -1,53 +1,35 @@
-:root{
-    --body-bg: #f5f5f5;
-    --card-bg: #e0e0e0;
-    --card-bd-col: #bdbdbd;
-    --text-color:#252525;
-  }
-  .dark_mode{
-    --body-bg: #252525;
-    --card-bg: #555;
-    --card-bd-col: #212121;
-    --text-color:#f5f5f5;
-  }
+:root {
+  --body-bg: #f5f5f5;
+  --card-bg: #e0e0e0;
+  --card-bd-col: #bdbdbd;
+  --text-color: #252525;
+}
+.dark_mode {
+  --body-bg: #252525;
+  --card-bg: #555;
+  --card-bd-col: #212121;
+  --text-color: #f5f5f5;
+}
 
-  body{
+body {
+  background: var(--body-bg);
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
 
-    background: var(--body-bg);
-    
-    align-items:center;
-    justify-content:center;
-    height:100vh;
-  }
 
-  .card{
-    padding: 20px;
-    background: var(--card-bg);
-    box-shadow: 5px 5px 10px -3px rgba(0,0,0,.3);
-    border: 1px solid var(--card-bd-col);
-    max-width: 300px;
-    border-radius: 10px;
-  }
-  
-
-  
-  #theme_toggler{
-    position: absolute;
-    bottom: 5%;
-    right: 5%;
-    background: #0096c3;
-    padding: 20px;
-    border-radius:30px;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  .day {
-    background-color: white;
-    color : black;
+.day {
+  background-color: white;
+  color: black;
 }
 
 .night {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
+}
+
+.toggleLabel {
+  cursor: pointer;
+  font-size: 36px; /* 아이콘의 크기를 조절하는 부분입니다. 원하는 크기로 조절할 수 있습니다. */
 }
