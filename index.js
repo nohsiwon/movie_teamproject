@@ -55,7 +55,7 @@ const mapMovies = (movie) => {
       </div>
     </div>
   `;
-
+  
   // 영화 부모 박스에 카드들 하나씩 넣기
   movies.append(movieBox);
 

@@ -1,5 +1,3 @@
-let cnt = 1; // 글번호로 할당
-
 // URL에서 movieId 가져오기
 
 console.log(movieId);
@@ -38,7 +36,8 @@ function writing() {
   const timestamp = new Date(); // 현재 시간으로 설정
 
   // Rest of your code to create the review and save to local storage
-  let el = makeDiv(writer, pwd, content, star);
+  const newIdx = issueNewCommentIdx();
+  let el = makeDiv(newIdx, writer, pwd, content, star);
   let list = document.getElementById('list');
   list.appendChild(el);
 
@@ -53,31 +52,31 @@ function writing() {
 }
 
 /* 글<div> 생성 ----------------------------------------------------*/
-function makeDiv(writer, pwd, content, star, timestamp) {
+function makeDiv(idx, writer, pwd, content, star, timestamp) {
   /*-- 1. <div id="d_1" pwd='1111'></div> ------------------------*/
   let newDiv = document.createElement('div'); // 새 <div> 태그 생성
-  newDiv.id = 'd_' + cnt; // 생성한 div에 id 지정. d_1, d_2 ...
+  newDiv.id = 'd_' + idx; // 생성한 div에 id 지정. d_1, d_2 ...
   newDiv.pwd = pwd; // 사용자가 입력한 pwd값을 파라미터로 받아 할당.
+  newDiv.classList.add('commentBox');
   const timeAgo = elapsedTime(timestamp); // 작성 시간을 계산
 
   /*-- 2. <div>태그의 innerHTML 값 넣어주기 --------------------------*/
   newDiv.innerHTML = `
   <div class="commentUserBox">
     <div class='commentUser'>
-        <div id='s_${cnt}'>${star}</div>
-        <div class='comment' id='c_${cnt}'>${content}</div>
+        <div id='s_${idx}'>${star}</div>
+        <div class='comment' id='c_${idx}'>${content}</div>
         <div class='timeBox'>
-          <div class='user' id='w_${cnt}'>${writer}</div>
+          <div class='user' id='w_${idx}'>${writer}</div>
           <div>${timeAgo}</div>
         </div>
       </div>
       <div class='buttonBox'>
-        <div class='BtnStyle' onclick=editForm(${cnt})>수정</div>
-        <div class='BtnStyle' onclick=del(${cnt})>삭제</div>
+        <div class='BtnStyle' onclick=editForm(${idx})>수정</div>
+        <div class='BtnStyle' onclick=del(${idx})>삭제</div>
       </div>
   </div>
   `;
 
-  cnt++;
   return newDiv;
 }

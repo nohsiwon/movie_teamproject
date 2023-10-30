@@ -25,10 +25,14 @@ function saveToLocalStorage(writer, pwd, content, star) {
       let post = posts[i];
       // 영화 ID에 따라 필터링
       if (post.movieId === movieId) {
-        let el = makeDiv(post.writer, post.pwd, post.content, post.star, post.timestamp);
+        let el = makeDiv(i, post.writer, post.pwd, post.content, post.star, post.timestamp);
         list.appendChild(el);
       }
     }
   }
   
+  function issueNewCommentIdx() {
+    let posts = JSON.parse(localStorage.getItem('posts')) || [];
+    return posts.length;
+  }
   

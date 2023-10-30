@@ -18,10 +18,10 @@ function editForm(cnt) {
   
     // 버튼에 cnt 속성을 추가해서 수정 글번호를 저장
     document.getElementById('editbtn').setAttribute('data-cnt', cnt);
-  
-    editForm.style.display = 'block'; // 화면에 수정폼이 나타나게 하기 
-	}
-
+    setTimeout(() => {
+      editForm.classList.toggle('editf'); // 화면에 수정폼이 나타나게 하기
+    }, 30);
+  }
   
   /* 1-2. 수정 완료하기 -----------------------------------------------*/
   function edit() {
@@ -56,8 +56,6 @@ function editForm(cnt) {
     cancel();
   }
   
-  
-  
   /* 수정된 내용을 로컬 스토리지에 업데이트 */
   function updateLocalStorage(cnt, newWriter, newcontent, newstar) {
     let posts = JSON.parse(localStorage.getItem('posts')) || [];
@@ -72,7 +70,11 @@ function editForm(cnt) {
   /* 1-3. 수정 취소하기 ----------------------------------------------*/
   function cancel() {
     let editForm = document.getElementById('editf'); // 수정폼div를 변수에 담기
-    editForm.style.display = 'none'; // 화면에 사라지게 하고 자리 뺌
+  
+    setTimeout(() => {
+      editForm.classList.toggle('editf'); // 화면에 사라지게 하고 자리 뺌
+    }, 30);
+  
     // 수정글에 붙여놓은 수정폼을 다시 <body>로 돌려놓음 (원래 자리)
     document.getElementsByTagName('body')[0].appendChild(editForm);
   }
@@ -92,10 +94,10 @@ function editForm(cnt) {
   }
   
   /* 글 삭제 시 로컬 스토리지에서 삭제 */
-  function deleteFromLocalStorage(cnt) {
+  function deleteFromLocalStorage(idx) {
     let posts = JSON.parse(localStorage.getItem('posts')) || [];
     // 해당 글번호를 가진 글 삭제
-    posts = posts.filter((post, index) => index !== cnt - 1);
+    posts.splice(idx, 1);
     localStorage.setItem('posts', JSON.stringify(posts));
   }
   
