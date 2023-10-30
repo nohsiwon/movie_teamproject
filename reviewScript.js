@@ -39,6 +39,10 @@ function writing() {
   let star = f.star.value;
   let errorDiv = document.getElementById('error');
 
+  // 버튼 요소를 가져와서 클릭 이벤트를 추가
+  const writeButton = document.getElementById('writeButton');
+  writeButton.addEventListener('click', writing);
+
   // 작성자, 글 비밀번호, 내용, 별점선택 유효성검사
   if (writer.length < 2) {
     errorDiv.textContent = '작성자는 두 글자 이상 입력해주세요.';
@@ -64,7 +68,7 @@ function writing() {
   const timestamp = new Date(); // 현재 시간으로 설정
 
   // Rest of your code to create the review and save to local storage
-  let el = makeDiv(writer, pwd, content, star, new Date());
+  let el = makeDiv(writer, pwd, content, star, new Date(), likeDislikes);
 
   let list = document.getElementById('list');
   list.appendChild(el);
@@ -76,7 +80,7 @@ function writing() {
   f.star.value = '별점선택';
 
   // 글 작성이 완료된 후 글 내용을 로컬 스토리지에 저장
-  saveToLocalStorage(writer, pwd, content, star, timestamp); // 시간 정보를 저장
+  saveToLocalStorage(writer, pwd, content, star, timestamp, likeDislikes); // 시간 정보를 저장
 }
 
 /* 글<div> 생성 ----------------------------------------------------*/
@@ -85,7 +89,7 @@ function makeDiv(writer, pwd, content, star, timestamp) {
   let newDiv = document.createElement('div'); // 새 <div> 태그 생성
   newDiv.id = 'd_' + cnt; // 생성한 div에 id 지정. d_1, d_2 ...
   newDiv.pwd = pwd; // 사용자가 입력한 pwd값을 파라미터로 받아 할당.
-  const timeAgo = elapsedTime(timestamp); // 작성 시간을 계산
+  let timeAgo = elapsedTime(timestamp); // 작성 시간을 계산
 
   /*-- 2. <div>태그의 innerHTML 값 넣어주기 --------------------------*/
   let html = `
@@ -100,14 +104,19 @@ function makeDiv(writer, pwd, content, star, timestamp) {
         <div class='BtnStyle' onclick=del(${cnt})>삭제</div>
       </div>
   </div>
-  `;
+  
+<div class="likeDislikeButtons">
+  <button id="likeBtn_${cnt}" class="likeBtn" onclick="toggleLikeDislike(${cnt}, 'like')">좋아요</button>
+  <button id="dislikeBtn_${cnt}" class="dislikeBtn" onclick="toggleLikeDislike(${cnt}, 'dislike')">싫어요</button>
+</div>
+`;
   newDiv.innerHTML = html;
   cnt++;
   return newDiv;
 }
 
 /* 작성한 글을 로컬 스토리지에 저장 */
-function saveToLocalStorage(writer, pwd, content, star, timestamp) {
+function saveToLocalStorage(writer, pwd, content, star, timestamp, likeDislikes) {
   let posts = JSON.parse(localStorage.getItem('posts')) || [];
   let post = {
     writer: writer,
@@ -116,15 +125,16 @@ function saveToLocalStorage(writer, pwd, content, star, timestamp) {
     star: star,
     movieId: movieId, // 영화 ID 추가
     timestamp: new Date(),
+    likeDislikes: likeDislikes,
   };
   posts.push(post);
   localStorage.setItem('posts', JSON.stringify(posts));
+  console.log(likeDislikes);
 }
 
 /* 페이지 로드 시 로컬 스토리지에서 글을 불러와 목록에 표시 */
-window.onload = function () {
-  loadFromLocalStorage();
-};
+
+loadFromLocalStorage();
 
 function loadFromLocalStorage() {
   let list = document.getElementById('list');
@@ -135,8 +145,8 @@ function loadFromLocalStorage() {
     let post = posts[i];
     // 영화 ID에 따라 필터링
     if (post.movieId === movieId) {
-      console.log('시간', post.timestamp);
-      let el = makeDiv(post.writer, post.pwd, post.content, post.star, post.timestamp);
+      console.log('날짜', post.timestamp);
+      let el = makeDiv(post.writer, post.pwd, post.content, post.star, post.timestamp, post.likeDislikes);
       list.appendChild(el);
     }
   }
@@ -203,12 +213,13 @@ function edit() {
 }
 
 /* 수정된 내용을 로컬 스토리지에 업데이트 */
-function updateLocalStorage(cnt, newWriter, newcontent, newstar) {
+function updateLocalStorage(cnt, newWriter, newcontent, newstar, newlikeDislikes) {
   let posts = JSON.parse(localStorage.getItem('posts')) || [];
   if (cnt > 0 && cnt <= posts.length) {
     posts[cnt - 1].writer = newWriter;
     posts[cnt - 1].content = newcontent;
     posts[cnt - 1].star = newstar;
+    posts[cnt - 1].likeDislikes = newlikeDislikes;
     localStorage.setItem('posts', JSON.stringify(posts));
   }
 }
