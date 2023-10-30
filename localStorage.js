@@ -1,19 +1,15 @@
-// 글 작성이 완료된 후 글 내용을 로컬 스토리지에 저장
-function saveToLocalStorage(writer, pwd, content, star, timestamp, likes, disLikes) {
-  const newIdx = issueNewCommentIdx();
-  const comment = {
-    id: newIdx,
-    writer,
-    pwd,
-    content,
-    star,
-    timestamp,
-    likes: 0, // 초기 좋아요 카운트
-    dislikes: 0, // 초기 싫어요 카운트
-  };
-
+/* 작성한 글을 로컬 스토리지에 저장 */
+function saveToLocalStorage(writer, pwd, content, star) {
   let posts = JSON.parse(localStorage.getItem('posts')) || [];
-  posts.push(comment);
+  let post = {
+    writer: writer,
+    pwd: pwd,
+    content: content,
+    star: star,
+    movieId: movieId, // 영화 ID 추가
+    timestamp: new Date(),
+  };
+  posts.push(post);
   localStorage.setItem('posts', JSON.stringify(posts));
 }
 
