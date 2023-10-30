@@ -80,3 +80,7 @@ function makeDiv(idx, writer, pwd, content, star, timestamp) {
 
   return newDiv;
 }
+
+// '작성' 버튼에 클릭 이벤트 리스너를 추가합니다.
+const submitButton = document.getElementById('submitButton');
+submitButton.addEventListener('click', writing);
