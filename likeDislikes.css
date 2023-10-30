@@ -1,0 +1,22 @@
+/* 좋아요와 싫어요 버튼 스타일 */
+.likeBtn,
+.dislikeBtn {
+  display: inline-block;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 20px; /* 버튼을 둥글게 만듭니다. */
+  background-color: #007bff; /* 배경색을 원하는 색상으로 변경하세요. */
+  color: #fff; /* 글자색을 흰색으로 설정합니다. */
+  cursor: pointer;
+  margin-right: 10px; /* 버튼 간격을 조절합니다. */
+}
+
+/* 좋아요 버튼 스타일 (예시) */
+.likeBtn {
+  background-color: rgb(39, 92, 51); /* 좋아요 버튼의 배경색을 초록색으로 설정합니다. */
+}
+
+/* 싫어요 버튼 스타일 (예시) */
+.dislikeBtn {
+  background-color: #9e222f; /* 싫어요 버튼의 배경색을 빨간색으로 설정합니다. */
+}

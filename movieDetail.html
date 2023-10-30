@@ -5,6 +5,7 @@
     <title>Movie Detail</title>
     <link rel="stylesheet" href="movieDetail.css" />
     <link rel="stylesheet" href="reviewStyle.css" />
+    <link rel="stylesheet" href="likeDislikes.css" />
   </head>
   <body>
     <header class="header">
@@ -58,7 +59,7 @@
             </tr>
 
             <tr>
-              <td><input class="BtnStyle" type="button" value="작성" onclick="writing()" /></td>
+              <td><input class="BtnStyle" type="button" value="작성" /></td>
             </tr>
           </table>
           <textarea class="contentBox" id="content" placeholder="작성해주세요"></textarea>
@@ -96,7 +97,14 @@
                   <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐</option>
                 </select>
               </td>
+              <td>
+                <button class="likeBtn">
+                  <svg aria-label="좋아요" class="_8-yf5 white" display="none" ....></svg>
+                  <svg aria-label="좋아요 취소" class="_8-yf5 red" display="none" ...></svg>
+                </button>
+              </td>
             </tr>
+
             <tr>
               <td>
                 <input class="BtnStyle" type="button" value="수정완료" id="editbtn" onclick="edit()" />
@@ -110,6 +118,7 @@
     </main>
 
     <script src="movieDetail.js"></script>
+    <script src="likeDislikes.js"></script>
     <script src="timeStamp.js"></script>
     <script src="editAndDelete.js"></script>
     <script src="writeReview.js"></script>
