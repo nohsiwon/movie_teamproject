@@ -22,4 +22,3 @@ const elapsedTime = (date) => {
 
   return start.toLocaleDateString();
 };
-// dd
