@@ -72,8 +72,6 @@ main {
   padding: 28px 0;
 }
 
-
-
 .contentBox {
   width: 1280px;
   margin: 0 auto;
@@ -94,7 +92,6 @@ main {
   font-size: 12px;
   cursor: pointer;
 }
-
 
 .selectSort {
   color: black !important;

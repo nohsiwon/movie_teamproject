@@ -58,6 +58,7 @@ function makeDiv(writer, pwd, content, star, timestamp) {
   let newDiv = document.createElement('div'); // 새 <div> 태그 생성
   newDiv.id = 'd_' + cnt; // 생성한 div에 id 지정. d_1, d_2 ...
   newDiv.pwd = pwd; // 사용자가 입력한 pwd값을 파라미터로 받아 할당.
+  newDiv.classList.add('commentBox');
   const timeAgo = elapsedTime(timestamp); // 작성 시간을 계산
 
   /*-- 2. <div>태그의 innerHTML 값 넣어주기 --------------------------*/
