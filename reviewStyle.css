@@ -55,6 +55,9 @@
   display: flex;
   gap: 8px;
 }
+.commentBox {
+  margin-bottom: 28px;
+}
 
 .commentTitle {
   font-size: 30px;
@@ -85,15 +88,8 @@
   margin: 10px 0;
 }
 
-.commentUserBox .commentUser .timeBox {
-  display: flex;
-  gap: 10px;
+.user {
   color: gray;
   font-weight: bold;
-  font-size: 12px;
-  align-items: flex-end;
-}
-
-.user {
   font-size: 14px;
 }

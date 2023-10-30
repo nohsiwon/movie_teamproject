@@ -100,4 +100,38 @@ function editForm(cnt) {
     posts.splice(idx, 1);
     localStorage.setItem('posts', JSON.stringify(posts));
   }
-  
+
+
+/* 1-3. 수정 취소하기 ----------------------------------------------*/
+function cancel() {
+  let editForm = document.getElementById('editf'); // 수정폼div를 변수에 담기
+
+  setTimeout(() => {
+    editForm.classList.toggle('editf'); // 화면에 사라지게 하고 자리 뺌
+  }, 30);
+
+  // 수정글에 붙여놓은 수정폼을 다시 <body>로 돌려놓음 (원래 자리)
+  document.getElementsByTagName('body')[0].appendChild(editForm);
+}
+
+/* 2. 삭제 -------------------------------------------------------*/
+function del(cnt) {
+  let pwd = prompt('글 비밀번호');
+  let delDiv = document.getElementById('d_' + cnt);
+  if (pwd == delDiv.pwd) {
+    // <div id = "list"> <delDiv> </div>
+    document.getElementById('list').removeChild(delDiv);
+    // 로컬 스토리지에서도 삭제
+    deleteFromLocalStorage(cnt);
+  } else {
+    alert('글 비밀번호 불일치. 삭제 취소');
+  }
+}
+
+/* 글 삭제 시 로컬 스토리지에서 삭제 */
+function deleteFromLocalStorage(cnt) {
+  let posts = JSON.parse(localStorage.getItem('posts')) || [];
+  // 해당 글번호를 가진 글 삭제
+  posts = posts.filter((post, index) => index !== cnt - 1);
+  localStorage.setItem('posts', JSON.stringify(posts));
+}
